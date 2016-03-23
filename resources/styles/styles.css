@@ -1,3 +1,30 @@
 h1 {
   color: blue;
 }
+
+.input-lg {
+  margin: 5px;
+}
+
+.btn-primary {
+  margin: 5px;
+}
+
+
+.high {
+  color: red;
+}
+
+.medium {
+  color: orange;
+}
+
+.low {
+  color: green;
+}
+
+.beer-icons {
+  width: 25px;
+  height: auto;
+  margin-left: 3px;
+}

@@ -2,23 +2,25 @@ import {Component} from 'angular2/core';
 import {Keg} from './keg.model';
 import {KegComponent} from "./keg.component";
 import {NewKegComponent} from "./new-keg.component";
+import {EditKegComponent} from './edit-keg.component';
 import {PintsPipe} from './pints.pipe';
 
 @Component({
   selector: 'kegs-list',
-  directives: [KegComponent, NewKegComponent],
+  directives: [KegComponent, NewKegComponent, EditKegComponent],
   pipes: [PintsPipe],
   inputs: ['kegsList'],
   template: `
-    <select (change)="onChange($event.target.value)">
+    <select (change)="onChange($event.target.value)" class="form-control">
       <option value="Almost Empty">Almost Empty</option>
       <option value="All Kegs" selected="selected">All Kegs</option>
     </select>
     <div *ngFor="#currentKeg of kegsList | pints:filterPint">
-      <h3 (click)="kegClicked(currentKeg)">{{ currentKeg.name }}</h3>
+      <h3 [class.high]="currentKeg.price >= 20" [class.medium]="currentKeg.price < 20 && currentKeg.price > 5" [class.low]="currentKeg.price <= 5" (click)="kegClicked(currentKeg)">{{ currentKeg.name }}<span><img src="https://cdn4.iconfinder.com/data/icons/mobile-app-icons/512/beermug.png" class="beer-icons"></span></h3>
       <keg-display *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-display>
     </div>
     <new-keg (onSubmitNewKeg)="createKeg($event)"></new-keg>
+    <edit-keg *ngIf="selectedKeg" [keg] = "selectedKeg"></edit-keg>
   `
 })
 
@@ -30,7 +32,11 @@ export class KegsListComponent {
 
   }
   kegClicked(clickedKeg: Keg): void {
-    this.selectedKeg = clickedKeg;
+    if(this.selectedKeg === clickedKeg) {
+      this.selectedKeg = undefined;
+    } else {
+      this.selectedKeg = clickedKeg;
+    }
   }
   createKeg(kegArray: Array<any>): void {
     console.log(kegArray);

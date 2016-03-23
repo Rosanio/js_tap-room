@@ -5,19 +5,19 @@ import {Keg} from './keg.model';
   selector: 'new-keg',
   outputs: ['onSubmitNewKeg'],
   template: `
-    <div class="keg-form">
+    <div class="keg-form col-sm-8">
       <h3>Tap a new keg:</h3>
-      <input placeholder="Name" class="col-sm-8 input-lg" #newName>
-      <input placeholder="Brand" class="col-sm-8 input-lg" #newBrand>
-      <input type="number" step="any" placeholder="Price" class="col-sm-8 input-lg" #newPrice>
-      <input placeholder="Alcohol" type="number" step="any" class="col-sm-8 input-lg" #newAlcohol>
-      <select #newType>
+      <input placeholder="Name" class="input-lg" #newName>
+      <input placeholder="Brand" class="input-lg" #newBrand>
+      <input type="number" step="any" placeholder="Price" class="input-lg" #newPrice>
+      <input placeholder="Alcohol" type="number" step="any" class="input-lg" #newAlcohol>
+      <select class="form-control" #newType>
         <option value="Ale">Ale</option>
         <option value="Stout">Stout</option>
         <option value="Lager">Lager</option>
         <option value="IPA">IPA</option>
       </select>
-      <button (click)="addKeg(newName, newBrand, newPrice, newAlcohol, newType)">Add</button>
+      <button (click)="addKeg(newName, newBrand, newPrice, newAlcohol, newType)" class="btn btn-primary">Add</button>
     </div>
   `
 })
