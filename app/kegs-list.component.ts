@@ -3,11 +3,12 @@ import {Keg} from './keg.model';
 import {KegComponent} from "./keg.component";
 import {NewKegComponent} from "./new-keg.component";
 import {EditKegComponent} from './edit-keg.component';
+import {KegAlcoholComponent} from './keg-alcohol.component';
 import {PintsPipe} from './pints.pipe';
 
 @Component({
   selector: 'kegs-list',
-  directives: [KegComponent, NewKegComponent, EditKegComponent],
+  directives: [KegComponent, NewKegComponent, EditKegComponent, KegAlcoholComponent],
   pipes: [PintsPipe],
   inputs: ['kegsList'],
   template: `
@@ -16,7 +17,17 @@ import {PintsPipe} from './pints.pipe';
       <option value="All Kegs" selected="selected">All Kegs</option>
     </select>
     <div *ngFor="#currentKeg of kegsList | pints:filterPint">
-      <h3 [class.high]="currentKeg.price >= 20" [class.medium]="currentKeg.price < 20 && currentKeg.price > 5" [class.low]="currentKeg.price <= 5" (click)="kegClicked(currentKeg)">{{ currentKeg.name }}<span><img src="https://cdn4.iconfinder.com/data/icons/mobile-app-icons/512/beermug.png" class="beer-icons"></span></h3>
+      <h3 [class.high]="currentKeg.price >= 20"
+        [class.medium]="currentKeg.price < 20 && currentKeg.price > 5"
+        [class.low]="currentKeg.price <= 5"
+        (click)="kegClicked(currentKeg)">
+        {{ currentKeg.name }}
+        <keg-alcohol *ngIf="currentKeg.drunkness > 2"></keg-alcohol>
+        <keg-alcohol *ngIf="currentKeg.drunkness > 4"></keg-alcohol>
+        <keg-alcohol *ngIf="currentKeg.drunkness > 6"></keg-alcohol>
+        <keg-alcohol *ngIf="currentKeg.drunkness > 8"></keg-alcohol>
+        <keg-alcohol *ngIf="currentKeg.drunkness > 10"></keg-alcohol>
+      </h3>
       <keg-display *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-display>
     </div>
     <new-keg (onSubmitNewKeg)="createKeg($event)"></new-keg>
