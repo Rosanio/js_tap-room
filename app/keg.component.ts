@@ -12,9 +12,9 @@ import {Keg} from './keg.model';
     <p>Pints Remaining: {{keg.pints}} </p>
     <div class="keg-quanity" *ngIf="keg.pints >0">
       <input type="number" placeholder="Number of pints" #pintQuantity>
-      <button class="btn btn-default" (click)="sellPint(pintQuantity)" >Sell Pints</button>
+      <button class="btn btn-default" (click)="sellPint(pintQuantity)">Sell Pints</button>
     </div>
-    <button class="btn btn-danger" (click)="newKeg()" *ngIf="keg.pints <= 0">New Keg</button>
+    <button class="btn btn-danger" (click)="newKeg()" *ngIf="keg.pints < 10">New Keg</button>
   `
 })
 

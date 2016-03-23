@@ -2,13 +2,19 @@ import {Component} from 'angular2/core';
 import {Keg} from './keg.model';
 import {KegComponent} from "./keg.component";
 import {NewKegComponent} from "./new-keg.component";
+import {PintsPipe} from './pints.pipe';
 
 @Component({
   selector: 'kegs-list',
   directives: [KegComponent, NewKegComponent],
+  pipes: [PintsPipe],
   inputs: ['kegsList'],
   template: `
-    <div *ngFor="#currentKeg of kegsList">
+    <select (change)="onChange($event.target.value)">
+      <option value="Almost Empty">Almost Empty</option>
+      <option value="All Kegs" selected="selected">All Kegs</option>
+    </select>
+    <div *ngFor="#currentKeg of kegsList | pints:filterPint">
       <h3 (click)="kegClicked(currentKeg)">{{ currentKeg.name }}</h3>
       <keg-display *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-display>
     </div>
@@ -19,6 +25,7 @@ import {NewKegComponent} from "./new-keg.component";
 export class KegsListComponent {
   public kegsList: Keg[];
   public selectedKeg: Keg;
+  public filterPint: string = "All Kegs"
   constructor() {
 
   }
@@ -30,5 +37,8 @@ export class KegsListComponent {
     this.kegsList.push (
       new Keg(kegArray[0], this.kegsList.length, kegArray[1], kegArray[2], kegArray[3], kegArray[4])
     );
+  }
+  onChange(filterOption) {
+    this.filterPint = filterOption;
   }
 }
