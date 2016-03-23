@@ -17,10 +17,10 @@ export class AppComponent {
   public kegs: Keg[];
   constructor() {
     this.kegs = [
-      new Keg("Parrot Ale", 0, "Avast Inc.", 1.95, 0.08),
-      new Keg("Walk-the-Plank", 1, "Avast Inc.", 100.95, 0.07),
-      new Keg("Eyepatch Lager", 2, "Jack Sparrow Enterprises", 5.95, 0.20),
-      new Keg("Peg Legs and Hook Hands", 3, "Blackbeard...just Blackbeard", 70.95, 0.08)
+      new Keg("Parrot Ale", 0, "Avast Inc.", 1.95, 0.08, "Ale"),
+      new Keg("Walk-the-Plank", 1, "Avast Inc.", 100.95, 0.07, "Stout"),
+      new Keg("Eyepatch Lager", 2, "Jack Sparrow Enterprises", 5.95, 0.20, "Lager"),
+      new Keg("Peg Legs and Hook Hands", 3, "Blackbeard...just Blackbeard", 70.95, 0.08, "IPA")
     ];
   }
 }
