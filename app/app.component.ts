@@ -19,8 +19,8 @@ import { Keg } from './keg.model';
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li [class.active]="selectedDiv === 'barSide'"><a href="#" class="slide">Barrr</a></li>
-          <li [class.active]="selectedDiv === 'inventorySide'"><a href="#" class="slide">View Inventory</a></li>
+          <li [class.active]="selectedDiv === 'barSide'"><a href="#" class="barSlide">Barrr</a></li>
+          <li [class.active]="selectedDiv === 'inventorySide'"><a href="#" class="inventorySlide">View Inventory</a></li>
         </ul>
       </div>
     </div>

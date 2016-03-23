@@ -1,18 +1,32 @@
+// import { Component } from 'angular2/core';
+// import {AppComponent} from './../../app/app.component';
+// import { Keg } from './keg.model';
 
+//find out how to import variables from other files
 
 $(function() {
-  console.log('loaded');
   setTimeout(function() {
-    $('.slide').click(function() {
-      console.log("clicked");
-      $(".container div:first").animate({
+    $('.barSlide').click(function() {
+
+      $(".inventorySide").animate({
         left: '-180%'
       }, 500, function() {
         $(this).css('left', '180%');
-        $(this).appendTo('.container');
       });
 
-      $('.container div:first').next().animate({
+      $(".barSide").animate({
+        left: '0'
+      }, 500);
+    });
+    $('.inventorySlide').click(function() {
+
+      $(".barSide").animate({
+        left: '-180%'
+      }, 500, function() {
+        $(this).css('left', '180%');
+      });
+
+      $(".inventorySide").animate({
         left: '0'
       }, 500);
     });

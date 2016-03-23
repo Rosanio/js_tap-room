@@ -17,7 +17,8 @@ import {PintsPipe} from './pints.pipe';
       <option value="All Kegs" selected="selected">All Kegs</option>
     </select>
     <div *ngFor="#currentKeg of kegsList | pints:filterPint">
-      <h3 [class.high]="currentKeg.price >= 20"
+      <h3 class="kegListItem"
+        [class.high]="currentKeg.price >= 20"
         [class.medium]="currentKeg.price < 20 && currentKeg.price > 5"
         [class.low]="currentKeg.price <= 5"
         (click)="kegClicked(currentKeg)">
