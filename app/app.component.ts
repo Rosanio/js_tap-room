@@ -25,7 +25,7 @@ import {KegInventoryListComponent} from './keg-inventory-list.component';
           <li (click)="clickInventory()" [class.active]="selectedDiv === 'inventorySide'"><a href="#" class="inventorySlide">View Inventory</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a>\${{money}}</a></li>
+          <li><a>\${{moneyString}}</a></li>
         </ul>
       </div>
     </div>
@@ -46,6 +46,7 @@ import {KegInventoryListComponent} from './keg-inventory-list.component';
 
 export class AppComponent {
   public money: number = 0;
+  public moneyString: string = "0";
   public kegs: Keg[];
   public kegInventory: Array<any>;
   public selectedDiv: string = "barSide";
@@ -75,6 +76,8 @@ export class AppComponent {
       console.log(this.kegInventory[i]);
       if(this.kegInventory[i].keg.id === keg.id) {
         this.kegInventory[i].quantity--;
+        this.money -= this.kegInventory[i].keg.price;
+        this.moneyString = (Math.round((this.money)*100)/100).toFixed(2);
         console.log(this.kegInventory[i].quantity)
       }
     }
@@ -84,8 +87,10 @@ export class AppComponent {
     this.kegInventory.push({keg: newKeg, quantity: kegArray[5]});
     this.kegs.push(newKeg);
     this.money -= kegArray[2] * kegArray[5];
+    this.moneyString = (Math.round((this.money)*100)/100).toFixed(2);
   }
   income(money: number) {
-    this.money = money;
+    this.money += Math.round((money)*100)/100;
+    this.moneyString = (Math.round((this.money)*100)/100).toFixed(2);
   }
 }

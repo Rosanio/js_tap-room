@@ -6,7 +6,8 @@ import {Keg} from './keg.model';
   inputs: ['keg'],
   template: `
     <p>Brand: {{keg.brand}} </p>
-    <p>Price: \${{keg.price}} </p>
+    <p>Keg Price: \${{keg.price}} </p>
+    <p>Pint Price: \${{pintPrice(keg)}}
     <p>Alcohol Content: {{keg.drunkness}}% </p>
     <p>Type of Beer: {{keg.type}} </p>
   `
@@ -14,4 +15,8 @@ import {Keg} from './keg.model';
 
 export class KegComponent {
   public keg: Keg;
+  public pintPrice(keg: Keg): string {
+    return (Math.round((this.keg.price/124 + 0.25)*100)/100).toFixed(2);
+  }
+
 }

@@ -11,7 +11,7 @@ import {PintsPipe} from './pints.pipe';
   selector: 'kegs-list',
   directives: [KegComponent, EditKegComponent, KegAlcoholComponent, KegBarInfoComponent, KegListItemComponent],
   pipes: [PintsPipe],
-  inputs: ['kegsList', 'money'],
+  inputs: ['kegsList'],
   outputs: ['onNewKegRequestToApp', 'onSellPints'],
   template: `
     <select (change)="onChange($event.target.value)" class="form-control">
@@ -29,7 +29,6 @@ import {PintsPipe} from './pints.pipe';
 
 export class KegsListComponent {
   public kegsList: Keg[];
-  public money: number;
   public filterPint: string = "All Kegs"
   public selectedKeg: Keg;
   public onNewKegRequestToApp: EventEmitter<Keg>;

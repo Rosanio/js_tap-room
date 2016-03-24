@@ -3,8 +3,8 @@ import {Keg} from './keg.model';
 
 @Component({
   selector: 'keg-bar-info',
-  inputs: ['keg', 'money'],
-  outputs: ['onNewKegRequest', 'onSellKeg'],
+  inputs: ['keg'],
+  outputs: ['onNewKegRequest', 'onSellPints'],
   template: `
   <p>Pints Remaining: {{keg.pints}} </p>
   <div class="keg-quanity" *ngIf="keg.pints >0">
@@ -17,7 +17,6 @@ import {Keg} from './keg.model';
 
 export class KegBarInfoComponent {
   public keg: Keg;
-  public money: number;
   public onNewKegRequest: EventEmitter<Keg>;
   public onSellPints: EventEmitter<number>;
   constructor() {
@@ -30,9 +29,10 @@ export class KegBarInfoComponent {
       if(this.keg.pints - parseInt(userQuantity.value) < 0) {
         alert("Arg not enough pints!");
       } else {
+        var money: number = 0;
         this.keg.pints -= parseInt(userQuantity.value);
-        this.money += (this.keg.price/124 + 0.25)*parseInt(userQuantity.value)
-        this.onSellPints.emit(this.money);
+        money += (this.keg.price/124 + 0.25)*parseInt(userQuantity.value)
+        this.onSellPints.emit(money);
       }
     }
   }
