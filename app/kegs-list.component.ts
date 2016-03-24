@@ -1,7 +1,6 @@
-import {Component} from 'angular2/core';
+import {Component, EventEmitter} from 'angular2/core';
 import {Keg} from './keg.model';
 import {KegComponent} from "./keg.component";
-import {NewKegComponent} from "./new-keg.component";
 import {EditKegComponent} from './edit-keg.component';
 import {KegAlcoholComponent} from './keg-alcohol.component';
 import {KegBarInfoComponent} from './keg-bar-info.component';
@@ -10,9 +9,10 @@ import {PintsPipe} from './pints.pipe';
 
 @Component({
   selector: 'kegs-list',
-  directives: [KegComponent, NewKegComponent, EditKegComponent, KegAlcoholComponent, KegBarInfoComponent, KegListItemComponent],
+  directives: [KegComponent, EditKegComponent, KegAlcoholComponent, KegBarInfoComponent, KegListItemComponent],
   pipes: [PintsPipe],
-  inputs: ['kegsList'],
+  inputs: ['kegsList', 'money'],
+  outputs: ['onNewKegRequestToApp', 'onSellPints'],
   template: `
     <select (change)="onChange($event.target.value)" class="form-control">
       <option value="Almost Empty">Almost Empty</option>
@@ -21,19 +21,22 @@ import {PintsPipe} from './pints.pipe';
     <div *ngFor="#currentKeg of kegsList | pints:filterPint">
       <keg-list-item [keg]="currentKeg" (click)="kegClicked(currentKeg)"></keg-list-item>
       <keg-display *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-display>
-      <keg-bar-info *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-bar-info>
+      <keg-bar-info *ngIf="currentKeg === selectedKeg" [keg]="currentKeg" (onNewKegRequest)="requestNewKeg($event)" (onSellPints)="updateMoney($event)"></keg-bar-info>
     </div>
-    <new-keg (onSubmitNewKeg)="createKeg($event)"></new-keg>
     <edit-keg *ngIf="selectedKeg" [keg] = "selectedKeg"></edit-keg>
   `
 })
 
 export class KegsListComponent {
   public kegsList: Keg[];
+  public money: number;
   public filterPint: string = "All Kegs"
   public selectedKeg: Keg;
+  public onNewKegRequestToApp: EventEmitter<Keg>;
+  public onSellPints: EventEmitter<number>;
   constructor() {
-
+    this.onNewKegRequestToApp = new EventEmitter();
+    this.onSellPints = new EventEmitter();
   }
   kegClicked(clickedKeg: Keg) {
     if(this.selectedKeg === clickedKeg) {
@@ -51,5 +54,12 @@ export class KegsListComponent {
   }
   onChange(filterOption) {
     this.filterPint = filterOption;
+  }
+  requestNewKeg(keg: Keg) {
+    console.log("it kind of works");
+    this.onNewKegRequestToApp.emit(keg);
+  }
+  updateMoney(money: number) {
+    this.onSellPints.emit(money);
   }
 }

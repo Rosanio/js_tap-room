@@ -6,7 +6,7 @@ import {Keg} from './keg.model';
   outputs: ['onSubmitNewKeg'],
   template: `
     <div class="keg-form col-sm-8">
-      <h3>Tap a new keg:</h3>
+      <h3>Order a new keg:</h3>
       <input placeholder="Name" class="input-lg" #newName>
       <input placeholder="Brand" class="input-lg" #newBrand>
       <input type="number" step="any" placeholder="Price" class="input-lg" #newPrice>
@@ -17,7 +17,8 @@ import {Keg} from './keg.model';
         <option value="Lager">Lager</option>
         <option value="IPA">IPA</option>
       </select>
-      <button (click)="addKeg(newName, newBrand, newPrice, newAlcohol, newType)" class="btn btn-primary">Add</button>
+      <input type="number" placeholder="Quantity" class="input-lg" #newQuantity>
+      <button (click)="addKeg(newName, newBrand, newPrice, newAlcohol, newType, newQuantity)" class="btn btn-primary">Add</button>
     </div>
   `
 })
@@ -27,13 +28,14 @@ export class NewKegComponent {
   constructor() {
     this.onSubmitNewKeg = new EventEmitter();
   }
-  addKeg(userName: HTMLInputElement, userBrand: HTMLInputElement, userPrice: HTMLInputElement, userAlcohol: HTMLInputElement, userType: HTMLInputElement) {
-    var kegArray: Array<any> = [userName.value, userBrand.value, userPrice.value, userAlcohol.value, userType.value];
+  addKeg(userName: HTMLInputElement, userBrand: HTMLInputElement, userPrice: HTMLInputElement, userAlcohol: HTMLInputElement, userType: HTMLInputElement, userQuantity: HTMLInputElement) {
+    var kegArray: Array<any> = [userName.value, userBrand.value, userPrice.value, userAlcohol.value, userType.value, userQuantity.value];
     console.log(kegArray);
     this.onSubmitNewKeg.emit(kegArray);
     userName.value = "";
     userBrand.value = "";
     userPrice.value = "";
     userAlcohol.value = "";
+    userQuantity.value = "";
   }
 }

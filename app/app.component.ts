@@ -24,24 +24,28 @@ import {KegInventoryListComponent} from './keg-inventory-list.component';
           <li (click)="clickBar()"[class.active]="selectedDiv === 'barSide'"><a href="#" class="barSlide">Barrr!</a></li>
           <li (click)="clickInventory()" [class.active]="selectedDiv === 'inventorySide'"><a href="#" class="inventorySlide">View Inventory</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a>\${{money}}</a></li>
+        </ul>
       </div>
     </div>
   </nav>
   <div class="container">
     <div class="barSide">
       <h1>Barrr!</h1>
-      <kegs-list [kegsList] = "kegs"></kegs-list>
+      <kegs-list [kegsList] = "kegs" [money] = "money" (onNewKegRequestToApp)="testFunction($event)" (onSellPints)="income($event)"></kegs-list>
 
     </div>
     <div class="inventorySide">
       <h1>KegsList</h1>
-      <keg-inventory-list [kegInventoryList] = "kegInventory"></keg-inventory-list>
+      <keg-inventory-list [kegInventoryList] = "kegInventory" (onNewKegCreation)="addInventoryKeg($event)"></keg-inventory-list>
     </div>
   </div>
     `
 })
 
 export class AppComponent {
+  public money: number = 0;
   public kegs: Keg[];
   public kegInventory: Array<any>;
   public selectedDiv: string = "barSide";
@@ -64,5 +68,24 @@ export class AppComponent {
   }
   clickInventory() {
     this.selectedDiv = "inventorySide";
+  }
+  testFunction(keg: Keg) {
+    console.log(keg);
+    for(var i = 0; i < this.kegInventory.length; i++) {
+      console.log(this.kegInventory[i]);
+      if(this.kegInventory[i].keg.id === keg.id) {
+        this.kegInventory[i].quantity--;
+        console.log(this.kegInventory[i].quantity)
+      }
+    }
+  }
+  addInventoryKeg(kegArray: Array<any>) {
+    var newKeg: Keg = new Keg(kegArray[0], this.kegInventory.length, kegArray[1], kegArray[2], kegArray[3], kegArray[4]);
+    this.kegInventory.push({keg: newKeg, quantity: kegArray[5]});
+    this.kegs.push(newKeg);
+    this.money -= kegArray[2] * kegArray[5];
+  }
+  income(money: number) {
+    this.money = money;
   }
 }
