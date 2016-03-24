@@ -9,10 +9,8 @@ $(function() {
     $('.barSlide').click(function() {
 
       $(".inventorySide").animate({
-        left: '-180%'
-      }, 500, function() {
-        $(this).css('left', '180%');
-      });
+        left: '180%'
+      }, 500);
 
       $(".barSide").animate({
         left: '0'
@@ -22,9 +20,7 @@ $(function() {
 
       $(".barSide").animate({
         left: '-180%'
-      }, 500, function() {
-        $(this).css('left', '180%');
-      });
+      }, 500);
 
       $(".inventorySide").animate({
         left: '0'

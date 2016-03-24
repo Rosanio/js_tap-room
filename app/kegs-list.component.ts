@@ -4,11 +4,13 @@ import {KegComponent} from "./keg.component";
 import {NewKegComponent} from "./new-keg.component";
 import {EditKegComponent} from './edit-keg.component';
 import {KegAlcoholComponent} from './keg-alcohol.component';
+import {KegBarInfoComponent} from './keg-bar-info.component';
+import {KegListItemComponent} from './keg-list-item.component';
 import {PintsPipe} from './pints.pipe';
 
 @Component({
   selector: 'kegs-list',
-  directives: [KegComponent, NewKegComponent, EditKegComponent, KegAlcoholComponent],
+  directives: [KegComponent, NewKegComponent, EditKegComponent, KegAlcoholComponent, KegBarInfoComponent, KegListItemComponent],
   pipes: [PintsPipe],
   inputs: ['kegsList'],
   template: `
@@ -17,19 +19,9 @@ import {PintsPipe} from './pints.pipe';
       <option value="All Kegs" selected="selected">All Kegs</option>
     </select>
     <div *ngFor="#currentKeg of kegsList | pints:filterPint">
-      <h3 class="kegListItem"
-        [class.high]="currentKeg.price >= 20"
-        [class.medium]="currentKeg.price < 20 && currentKeg.price > 5"
-        [class.low]="currentKeg.price <= 5"
-        (click)="kegClicked(currentKeg)">
-        {{ currentKeg.name }}
-        <keg-alcohol *ngIf="currentKeg.drunkness > 2"></keg-alcohol>
-        <keg-alcohol *ngIf="currentKeg.drunkness > 4"></keg-alcohol>
-        <keg-alcohol *ngIf="currentKeg.drunkness > 6"></keg-alcohol>
-        <keg-alcohol *ngIf="currentKeg.drunkness > 8"></keg-alcohol>
-        <keg-alcohol *ngIf="currentKeg.drunkness > 10"></keg-alcohol>
-      </h3>
+      <keg-list-item [keg]="currentKeg" (click)="kegClicked(currentKeg)"></keg-list-item>
       <keg-display *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-display>
+      <keg-bar-info *ngIf="currentKeg === selectedKeg" [keg] = "currentKeg"></keg-bar-info>
     </div>
     <new-keg (onSubmitNewKeg)="createKeg($event)"></new-keg>
     <edit-keg *ngIf="selectedKeg" [keg] = "selectedKeg"></edit-keg>
@@ -38,16 +30,17 @@ import {PintsPipe} from './pints.pipe';
 
 export class KegsListComponent {
   public kegsList: Keg[];
-  public selectedKeg: Keg;
   public filterPint: string = "All Kegs"
+  public selectedKeg: Keg;
   constructor() {
 
   }
-  kegClicked(clickedKeg: Keg): void {
+  kegClicked(clickedKeg: Keg) {
     if(this.selectedKeg === clickedKeg) {
       this.selectedKeg = undefined;
     } else {
       this.selectedKeg = clickedKeg;
+      console.log(this.selectedKeg);
     }
   }
   createKeg(kegArray: Array<any>): void {
