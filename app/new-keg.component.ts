@@ -18,7 +18,7 @@ import {Keg} from './keg.model';
         <option value="IPA">IPA</option>
       </select>
       <input type="number" placeholder="Quantity" class="input-lg" #newQuantity>
-      <button (click)="addKeg(newName, newBrand, newPrice, newAlcohol, newType, newQuantity)" class="btn btn-primary">Add</button>
+      <button (click)="addKeg(newName, newBrand, newPrice, newAlcohol, newType, newQuantity)" class="newBtn btn btn-primary">Add</button>
     </div>
   `
 })

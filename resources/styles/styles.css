@@ -1,5 +1,30 @@
+body{
+  font-family: 'Open Sans', sans-serif;
+}
 h1 {
-  color: blue;
+  color: white;
+  letter-spacing: 2px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 100px;
+}
+
+.navbar-default{
+  background-color: #AAD2BA;
+  border-color: #AAD2BA;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: black;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: black;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  background-color: #B5FED9;
+  color: black;
 }
 
 .input-lg {
@@ -12,15 +37,15 @@ h1 {
 
 
 .high {
-  color: red;
+  color: #FFA69E;
 }
 
 .medium {
-  color: orange;
+  color: #B5FED9;
 }
 
 .low {
-  color: green;
+  color: #C5BCD1;
 }
 
 .beer-icons {
@@ -65,7 +90,7 @@ h1 {
 }
 
 html{
-  background: url("./../../resources/images/bw_bar.jpg") no-repeat center center fixed;
+  background: url("./../../resources/images/new-bar.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -80,6 +105,8 @@ p {
 
 h3 {
   color: white;
+  text-shadow: 1px 1px 1px lightslategrey;
+  letter-spacing: 1.5px;
 }
 
 .beer-icons {
@@ -90,4 +117,106 @@ h3 {
 #logo img {
   -webkit-filter: invert(0);
  filter: invert(0);
+}
+
+.keg-form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  background-color: black;
+  padding: 3%;
+  box-shadow: 3px 3px 3px rgba(255,255,255,0.5);
+  border-radius: 5px;
+}
+
+.newBtn {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  transition: all 500ms linear;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.newBtn:hover {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+}
+
+@keyframes bounce {
+  10% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(42px);
+  }
+}
+@keyframes bounce2 {
+  10% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(68px);
+  }
+}
+@keyframes bounce3 {
+  10% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(68px);
+  }
+}
+
+#circle1 {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  background: blue;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  margin-left: 40%;
+  background: radial-gradient(rgba(255,255,255,0.5), white);
+  opacity: 0.85;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+  animation-name: bounce;
+}
+#circle2 {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  background: blue;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  margin-left: 8%;
+  background: radial-gradient(rgba(255,255,255,0.5), white);
+  opacity: 0.85;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+  animation-name: bounce2;
+}
+#circle3 {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  background: blue;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  margin-left: 5%;
+  background: radial-gradient(rgba(242, 242, 242,0.5), white);
+  opacity: 0.85;
+  animation-duration: 1.05s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  animation-direction: alternate;
+  animation-name: bounce3;
 }

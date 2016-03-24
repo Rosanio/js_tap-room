@@ -25,13 +25,16 @@ import {KegInventoryListComponent} from './keg-inventory-list.component';
           <li (click)="clickInventory()" [class.active]="selectedDiv === 'inventorySide'"><a href="#" class="inventorySlide">View Inventory</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a>\${{moneyString}}</a></li>
+          <li><a>Cash: \${{moneyString}}</a></li>
         </ul>
       </div>
     </div>
   </nav>
   <div class="container">
     <div class="barSide">
+      <div id="circle1"></div>
+      <div id="circle2"></div>
+      <div id="circle3"></div>
       <h1>Barrr!</h1>
       <kegs-list [kegsList] = "kegs" [money] = "money" (onNewKegRequestToApp)="testFunction($event)" (onSellPints)="income($event)"></kegs-list>
 
